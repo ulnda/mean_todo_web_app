@@ -9,7 +9,7 @@
           td.col-xs-6.title.vertical-align {{ t.title }}
           td.col-xs-6
             .pull-right
-              a.btn.btn-danger(ng-click="deleteTask(t)") Delete
+              a.btn.btn-danger(ng-click="removeTask(t)") Remove
               a.btn.btn-primary(ui-sref="tasks.edit({ id : t.id })") Edit
     .without-tasks(ng-hide="tasks.length")
       h3.text-center There are no tasks. 
