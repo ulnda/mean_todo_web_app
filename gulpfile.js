@@ -26,22 +26,24 @@ var inject = require('gulp-inject');
 
 // Cleaning project folder task
 gulp.task('clean', function() {
-  return gulp.src(dist + "/*").pipe(clean({force: true}));
+  return gulp.src(dist + '/*').pipe(clean({force: true}));
 });
 
 gulp.task('clean_styles', function() {
-  return gulp.src(dist + "css/").pipe(clean({force: true}));
+  return gulp.src([dist + 'css/**/*.css', '!' + dist + 'css/bower_components*.css'])
+          .pipe(clean({force: true}));
 });
 
 gulp.task('clean_scripts', function() {
-  return gulp.src(dist + "js/").pipe(clean({force: true}));
+  return gulp.src([dist + 'js/**/*.js', '!' + dist + 'js/bower_components*.js'])
+          .pipe(clean({force: true}));
 });
 
 // Processing styles task
 gulp.task('styles', function() {
   return gulp.src('app/css/*.scss')
           .pipe(sass())
-          .pipe(gulp.dest(dist + "css/"));
+          .pipe(gulp.dest(dist + 'css/'));
 });
 
 // Processing scripts task
@@ -61,7 +63,7 @@ gulp.task('images', function() {
 
 // Processing templates task
 gulp.task('templates', function() {
-  return gulp.src(['app/**/*.jade', '!app/index.jade'])
+  return gulp.src(['app/**/*.jade', '!app/index.jade', '!app/_*.jade'])
           .pipe(jade())
           .pipe(minifyHTML())
           .pipe(gulp.dest(dist));
@@ -123,5 +125,5 @@ gulp.task('server', function() {
 
 // Default task
 gulp.task('default', function() {
-  runSequence('clean', ['styles', 'scripts', 'images', 'bower_components'], 'templates', 'inject', 'server', 'watch');
+  runSequence('clean', ['styles', 'scripts', 'images', 'templates', 'bower_components'], 'inject', 'server', 'watch');
 })
