@@ -63,7 +63,7 @@ gulp.task('images', function() {
 
 // Processing templates task
 gulp.task('templates', function() {
-  return gulp.src(['app/**/*.jade', '!app/index.jade', '!app/_*.jade'])
+  return gulp.src(['app/**/*.jade', '!app/index.jade', '!app/**/_*.jade'])
           .pipe(jade())
           .pipe(minifyHTML())
           .pipe(gulp.dest(dist));

@@ -28,4 +28,18 @@ angular.module('app.tasks.controllers', []).controller('TasksController',
 
     $scope.cancel = ->
       $modalInstance.dismiss('cancel')
+]).controller('NewTaskController', ['$scope', '$state', '$modal', ($scope, 
+  $state, $modal) ->
+
+    $scope.task = {}
+
+    $scope.createTask = ->
+      console.log($scope.task)
+]).controller('EditTaskController', ['$scope', '$state', '$modal', ($scope, 
+  $state, $modal) ->
+
+    $scope.task = { id: 3, title: '112233', description: '445566' }
+
+    $scope.updateTask = ->
+      console.log($scope.task)
 ])

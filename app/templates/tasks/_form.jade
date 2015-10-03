@@ -1,0 +1,13 @@
+.form-group(ng-class="{ 'has-error' : businessForm.name.$dirty && businessForm.name.$invalid }")
+  label.col-sm-3.control-label(for="name") Title
+  .col-sm-9
+    input.form-control#title(type="text", name="title", ng-model="task.title", ng-required="true", placeholder="Title")
+    span.error-message(ng-show="businessForm.name.$dirty && businessForm.name.$invalid") Required field
+.form-group(ng-class="{ 'has-error' : businessForm.description.$dirty && businessForm.description.$invalid }")
+  label.col-sm-3.control-label(for="description") Description
+  .col-sm-9
+    textarea.form-control#description(cols="8", rows="6", name="description", ng-model="task.description", placeholder="Description")
+    span.error-message(ng-show="businessForm.description.$dirty && businessForm.description.$invalid") Required field
+.form-group
+  .col-sm-9.col-sm-offset-3
+    button.btn.btn-success(type="submit", ng-click="saveBusiness()") Save

@@ -1,5 +1,4 @@
-module = angular.module('app', ['app.tasks', 'ui.bootstrap', 'ui.router', 
-  'dndLists'])
+module = angular.module('app', ['app.tasks', 'ui.bootstrap', 'ui.router'])
 
 module.config(['$locationProvider', '$urlRouterProvider', ($locationProvider, 
   $urlRouterProvider) ->
