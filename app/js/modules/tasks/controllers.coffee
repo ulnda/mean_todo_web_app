@@ -1,12 +1,7 @@
 angular.module('app.tasks.controllers', []).controller('TasksController',
-  ['$scope', '$state', '$modal', ($scope, $state, $modal) ->
+  ['$scope', '$state', '$modal', 'Task', ($scope, $state, $modal, Task) ->
 
-    $scope.tasks = [
-      { id: 1, title: 'Some Title 1' },
-      { id: 2, title: 'Some Title 2' },
-      { id: 3, title: 'Some Title 3' },
-      { id: 4, title: 'Some Title 4' }
-    ]
+    $scope.tasks = Task.query()
 
     $scope.removeTask = (task) ->
       $modal.open
@@ -22,24 +17,26 @@ angular.module('app.tasks.controllers', []).controller('TasksController',
     $scope.task = task
 
     $scope.ok = ->
-      #task.$delete ->
-      $modalInstance.dismiss('ok')
-      $state.go $state.current, {}, { reload: true }
+      task.$delete ->
+        $modalInstance.dismiss('ok')
+        $state.go $state.current, {}, { reload: true }
 
     $scope.cancel = ->
       $modalInstance.dismiss('cancel')
-]).controller('NewTaskController', ['$scope', '$state', '$modal', ($scope, 
-  $state, $modal) ->
+]).controller('NewTaskController', ['$scope', '$state', '$modal', 'Task', 
+  ($scope, $state, $modal, Task) ->
 
-    $scope.task = {}
+    $scope.task = new Task()
 
     $scope.createTask = ->
-      console.log($scope.task)
-]).controller('EditTaskController', ['$scope', '$state', '$modal', ($scope, 
-  $state, $modal) ->
+      $scope.task.$save ->
+        $state.go('tasks.all')
+]).controller('EditTaskController', ['$scope', '$state', '$stateParams', '$modal', 
+  'Task', ($scope, $state, $stateParams, $modal, Task) ->
 
-    $scope.task = { id: 3, title: '112233', description: '445566' }
+    $scope.task = Task.get { id: $stateParams.id }
 
     $scope.updateTask = ->
-      console.log($scope.task)
+      $scope.task.$update ->
+        $state.go('tasks.all')
 ])

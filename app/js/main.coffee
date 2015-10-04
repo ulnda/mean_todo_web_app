@@ -1,4 +1,5 @@
-module = angular.module('app', ['app.tasks', 'ui.bootstrap', 'ui.router'])
+module = angular.module('app', ['app.tasks', 'ui.bootstrap', 'ui.router',
+  'ngResource'])
 
 module.config(['$locationProvider', '$urlRouterProvider', ($locationProvider, 
   $urlRouterProvider) ->

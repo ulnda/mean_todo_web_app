@@ -1,4 +1,5 @@
-module = angular.module('app.tasks', ['ui.router', 'app.tasks.controllers'])
+module = angular.module('app.tasks', ['ui.router', 'app.tasks.controllers',
+  'app.tasks.services'])
 
 module.config(['$stateProvider', '$locationProvider', ($stateProvider,
   $locationProvider) ->
