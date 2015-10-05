@@ -24,6 +24,8 @@ var connect = require('gulp-connect');
 var rev = require('gulp-rev');
 var inject = require('gulp-inject');
 
+var Server = require('karma').Server;
+
 // Cleaning project folder task
 gulp.task('clean', function() {
   return gulp.src(dist + '/*').pipe(clean({force: true}));
@@ -101,6 +103,15 @@ gulp.task('bower_components', function() {
           .pipe(cssFilter.restore())
           .pipe(fontFilter)
           .pipe(gulp.dest(dist + 'fonts/'));
+});
+
+// Unit-testing
+gulp.task('test', function(done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+  }, function() {
+    done();
+  }).start();
 });
 
 // Watching files for changes task
