@@ -25,6 +25,7 @@ var rev = require('gulp-rev');
 var inject = require('gulp-inject');
 
 var Server = require('karma').Server;
+var protractor = require("gulp-protractor").protractor;
 
 // Cleaning project folder task
 gulp.task('clean', function() {
@@ -106,12 +107,17 @@ gulp.task('bower_components', function() {
 });
 
 // Unit-testing
-gulp.task('test', function(done) {
+gulp.task('unit-testing', function(done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
   }, function() {
     done();
   }).start();
+});
+
+gulp.task('e2e-testing', function() {
+  gulp.src([]).pipe(protractor({ configFile: "protractor.conf.js" }))
+    .on('error', function(e) { throw e })
 });
 
 // Watching files for changes task

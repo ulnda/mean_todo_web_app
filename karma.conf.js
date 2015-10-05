@@ -13,7 +13,7 @@ module.exports = function(config) {
     files: [
       'dist/js/**/*.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'tests/**/*.js',
+      'unit-tests/**/*.js',
     ],
 
     // list of files to exclude
